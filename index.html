@@ -1,1 +1,68 @@
-Hello test
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="utf-8">
+    <title>Spark Writing</title>
+    <meta name="description" content="A super small writing app">
+    <meta name="keywords" content="offline, writing, responsive, projects">
+    <meta name="author" content="David Rawk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="manifest" href="/manifest.json">
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#000"/>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">  <!-- avoid the fav icon -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="icon" href="fav.ico">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+  </head>
+
+  <body >
+    <div class='main' style="overflow: hidden">
+      <div style="background: black; color: white; width:100%; padding: 5px 10px;">
+        <label for="show_menu">
+          ☰
+          <span style="font-size: 20px; padding-left: 20px">Spark Writing</span>
+        </label>
+
+      </div>
+      <div class="landing_wrapper">
+          <input type="checkbox" class="display_none view_toggle" checked=true id="show_menu"/>
+          <div class="landing_left togglable" id="menu">
+            <div style="width: 100%; text-align: center; margin-top: 20px">
+              <img src="images/icons/icon-192x192.png"/>
+            </div>
+          </div>
+        <div class="landing_right">
+          <input type='hidden' id="id_field"/>
+          <textarea rows="20", id="text_field" onkeyup="saveNote()" onchange="saveNote()" placeholder="Enter your note..."></textarea>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+
+  <script src="myscript.js"></script>
+  <script src="scripts/encryption.js"></script>
+  <script src="scripts/database.js"></script>
+  <script src="models/app.js"></script>
+  <script src="models/project.js"></script>
+  <script>
+    function setPassword(password){ sessionStorage.setItem("password", password); }
+    var key = sessionStorage.getItem("password");
+
+    document.addEventListener("DOMContentLoaded", function(){
+      newNote();
+      setTimeout(function(){ Project.all(loadMenu) }, (1000));
+
+      if ('serviceWorker' in navigator) {
+          navigator.serviceWorker
+                  .register('sw.js', {updateViaCache: 'none'})
+                  .then(function() { console.log('[ServiceWorker] Registered'); });
+        }
+    });
+  </script>
