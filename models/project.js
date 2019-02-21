@@ -4,7 +4,7 @@ class Project {
     this.id = id || new Date().getTime();
   }
   static all(callback){
-    alert('getting here')
+    fetchAll('projects', callback)
   }
   save(){
     saveRecord('projects', id, name)

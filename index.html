@@ -16,19 +16,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="icon" href="fav.ico">
+    <link rel="shortcut icon" href="fav.ico" />
 
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
   </head>
 
-  <body >
+  <body style="margin: 0;">
+    <input type="checkbox"  class="view_toggle"/>projects
+    <object class="togglable" type="text/html" data="views/projects.html" src="views/projects.html" style="width: 100%" ></object>
+
     <div class='main' style="overflow: hidden">
       <div style="background: black; color: white; width:100%; padding: 5px 10px;">
         <label for="show_menu">
           ☰
           <span style="font-size: 20px; padding-left: 20px">Spark Writing</span>
         </label>
-
       </div>
       <div class="landing_wrapper">
           <input type="checkbox" class="display_none view_toggle" checked=true id="show_menu"/>
@@ -49,7 +52,6 @@
   <script src="myscript.js"></script>
   <script src="scripts/encryption.js"></script>
   <script src="scripts/database.js"></script>
-  <script src="models/app.js"></script>
   <script src="models/project.js"></script>
   <script>
     function setPassword(password){ sessionStorage.setItem("password", password); }
